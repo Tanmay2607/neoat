@@ -5,7 +5,6 @@ import matplotlib.pyplot as plt
 from openai import OpenAI
 import re
 import os
-os.environ["OPENAI_API_KEY"] = api_key
 # --- 2. Helper: Extract code from LLM ---
 def extract_python_code(response_text):
     match = re.search(r"```(?:python)?(.*?)```", response_text, re.DOTALL)
