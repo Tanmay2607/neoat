@@ -19,7 +19,7 @@ client = OpenAI(
     base_url="https://openrouter.ai/api/v1",
     api_key=api_key,
     default_headers={
-        "HTTP-Referer": "https://neoat.streamlit.app",  # 🔁 your Streamlit app's domain
+        "HTTP-Referer": "https://ko4t3cifhed5jwykr8efcb.streamlit.app",  # 🔁 your Streamlit app's domain
         "X-Title": "NeoAT Excel Assistant"
     }
 )
