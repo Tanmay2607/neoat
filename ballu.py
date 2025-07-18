@@ -63,9 +63,16 @@ def execute_generated_code(code, df):
     local_scope = {'df': df, 'pd': pd, 'plt': plt}
     try:
         exec(code, {}, local_scope)
-        return local_scope.get("result", "✅ Code executed (e.g., chart displayed).")
+        result = local_scope.get("result", None)
+
+        # Post-process if result is a Series of country names
+        if isinstance(result, pd.Series) and result.dtype == object:
+            return f"Count: {len(result)}\nCountries:\n" + "\n".join(result)
+
+        return result or "✅ Code executed (e.g., chart displayed)."
     except Exception as e:
         return f"❌ Error executing code: {e}"
+
 
 # --- 5. Streamlit App ---
 st.set_page_config(page_title="NeoAT Excel Assistant", layout="centered")
