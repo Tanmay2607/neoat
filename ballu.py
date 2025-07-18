@@ -72,8 +72,7 @@ st.set_page_config(page_title="NeoAT Excel Assistant", layout="centered")
 st.title("📊 Natural Language Excel Assistant")
 st.markdown("Ask questions like:\n- *‘Count countries with lower rank than Syria’*\n- *‘Plot bar chart of top 5 by score’*")
 
-api_key = st.text_input("🔑 Enter your OpenRouter API Key", type="password")
-
+api_key = st.secrets["openai_api_key"]
 uploaded_file = st.file_uploader("📁 Upload your Excel file", type=["xlsx"])
 query = st.text_input("❓ Ask a question about your data")
 
