@@ -57,6 +57,7 @@ Your task is to generate a Python script to answer the query.
 3. The code must calculate the answer and store it in a variable named 'result'.
 4. If the query requires a visualization (e.g., "bar chart", "histogram"), generate valid code to create the plot using matplotlib.
 5. Assume 'df' is already loaded.
+6. If returning a list of items (like countries), also return the count in the `result`.
 """.strip()
 
 def execute_generated_code(code, df):
