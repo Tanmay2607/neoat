@@ -65,11 +65,12 @@ def execute_generated_code(code, df):
         exec(code, {}, local_scope)
         result = local_scope.get("result", None)
 
-        # Post-process if result is a Series of country names
+        # If result is a Series of countries, return count and names
         if isinstance(result, pd.Series) and result.dtype == object:
-            return f"Count: {len(result)}\nCountries:\n" + "\n".join(result)
+            return f"Count: {len(result)}\nCountries:\n" + "\n".join(result.astype(str))
 
-        return result or "✅ Code executed (e.g., chart displayed)."
+        return result if result is not None else "✅ Code executed (e.g., chart displayed)."
+
     except Exception as e:
         return f"❌ Error executing code: {e}"
 
