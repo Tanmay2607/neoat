@@ -14,15 +14,16 @@ def extract_python_code(response_text):
     return response_text
 
 # --- 3. OpenRouter LLM call ---
+# --- 3. OpenRouter LLM call ---
 def call_llm_with_openrouter(prompt, api_key):
-client = OpenAI(
-    base_url="https://openrouter.ai/api/v1",
-    api_key=api_key,
-    default_headers={
-        "HTTP-Referer": "https://ko4t3cifhed5jwykr8efcb.streamlit.app",  # 🔁 your Streamlit app's domain
-        "X-Title": "NeoAT Excel Assistant"
-    }
-)
+    client = OpenAI(
+        base_url="https://openrouter.ai/api/v1",
+        api_key=api_key,
+        default_headers={
+            "HTTP-Referer": "https://ko4t3cifhed5jwykr8efcb.streamlit.app",
+            "X-Title": "NeoAT Excel Assistant"
+        }
+    )
     response = client.chat.completions.create(
         model="mistralai/mistral-7b-instruct",
         messages=[
@@ -31,6 +32,7 @@ client = OpenAI(
         ]
     )
     return response.choices[0].message.content
+
 
 # --- 4. Schema + Normalization ---
 def normalize_column_names(df):
