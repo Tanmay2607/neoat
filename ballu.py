@@ -52,14 +52,13 @@ Your task is to generate a Python script to answer the query.
 "{query}"
 
 **Instructions:**
-1. Generate only executable Python code that uses the 'df' DataFrame.
-2. Do NOT include explanations or text outside the code block.
-3. The code must calculate the answer and store it in a variable named 'result'.
-4. If the query requires a visualization (e.g., "bar chart", "histogram"), generate valid code to create the plot using matplotlib.
-5. Assume 'df' is already loaded.
-6. Match names using case-insensitive substring matching if exact matches aren't found.
-7. Return 'Person not found' if no row matches.
-8. Avoid using `.iloc[0]` unless you check that the result is not empty
+1. Use only executable Python code with the 'df' DataFrame.
+2. Use safe indexing (avoid `.iloc[0]` or `.values[0]` unless you check if the DataFrame is not empty).
+3. If querying by name or string, use case-insensitive match (e.g., `.str.contains()` or `.str.lower()`).
+4. If no match is found, set `result = "Not found"`.
+5. If the query requires a plot, generate a valid `matplotlib` chart using `plt`.
+6. Output should be saved in a variable named `result`.
+7. Do not include explanations or Markdown — only raw Python code in a code block.
 """.strip()
 
 def execute_generated_code(code, df):
