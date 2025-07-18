@@ -4,7 +4,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from openai import OpenAI
 import re
-
+import os
+os.environ["OPENAI_API_KEY"] = api_key
 # --- 2. Helper: Extract code from LLM ---
 def extract_python_code(response_text):
     match = re.search(r"```(?:python)?(.*?)```", response_text, re.DOTALL)
@@ -14,7 +15,14 @@ def extract_python_code(response_text):
 
 # --- 3. OpenRouter LLM call ---
 def call_llm_with_openrouter(prompt, api_key):
-    client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=api_key)
+client = OpenAI(
+    base_url="https://openrouter.ai/api/v1",
+    api_key=api_key,
+    default_headers={
+        "HTTP-Referer": "https://neoat.streamlit.app",  # 🔁 your Streamlit app's domain
+        "X-Title": "NeoAT Excel Assistant"
+    }
+)
     response = client.chat.completions.create(
         model="mistralai/mistral-7b-instruct",
         messages=[
