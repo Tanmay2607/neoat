@@ -58,6 +58,8 @@ Your task is to generate a Python script to answer the query.
 4. If the query requires a visualization (e.g., "bar chart", "histogram"), generate valid code to create the plot using matplotlib.
 5. Assume 'df' is already loaded.
 6. Match names using case-insensitive substring matching if exact matches aren't found.
+7. Return 'Person not found' if no row matches.
+8. Avoid using `.iloc[0]` unless you check that the result is not empty
 """.strip()
 
 def execute_generated_code(code, df):
