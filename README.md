@@ -32,4 +32,8 @@ A Streamlit-powered conversational assistant that lets you query Excel files usi
    In ~/.streamlit/secrets.toml (locally) or via the Streamlit Cloud UI:
    ```
    openai_api_key = "YOUR_OPENROUTER_API_KEY"
+   
+## ▶️ Run the App
+```bash
+streamlit run app.py
 ```
