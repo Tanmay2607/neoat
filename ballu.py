@@ -60,7 +60,9 @@ Your task is to generate a Python script to answer the query.
 **Instructions:**
 1. Generate only executable Python code that uses the 'df' DataFrame.
 2. Do NOT include explanations or text outside the code block.
-3. The code must calculate the answer and store it in a variable named 'result'.
+3. 3. The code must calculate the answer and assign it to a variable named `result`. 
+   - If the query involves listing rows, assign the filtered DataFrame to `result`.
+   - If it involves a value (like sum or count), assign the scalar to `result`.
 4. If the query requires a visualization (e.g., "bar chart", "histogram"), generate valid code to create the plot using matplotlib.
    Use `st.pyplot(plt.gcf())` instead of `plt.show()` to display the chart in Streamlit.
 5. Assume 'df' is already loaded.
