@@ -21,7 +21,9 @@ A Streamlit-powered conversational assistant that lets you query Excel files usi
    ```bash
    git clone https://github.com/Tanmay2607/neoat.git
    cd neoat
-
- 2. Install dependencies
-pip install -r requirements.txt
+   ```
+ 2. Install dependencies:
+    ```bash
+    pip install -r requirements.txt
+    ```
 
