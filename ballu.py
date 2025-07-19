@@ -60,6 +60,7 @@ Your task is to generate a Python script to answer the query.
 2. Do NOT include explanations or text outside the code block.
 3. The code must calculate the answer and store it in a variable named 'result'.
 4. If the query requires a visualization (e.g., "bar chart", "histogram"), generate valid code to create the plot using matplotlib.
+   Use `st.pyplot(plt.gcf())` instead of `plt.show()` to display the chart in Streamlit.
 5. Assume 'df' is already loaded.
 6. When matching text (like names or countries), always perform case-insensitive and punctuation-insensitive matching using `.str.lower().replace(",", "").str.strip()`.
 7. Always check `.empty` before accessing `.iloc[0]` to avoid index errors.
@@ -67,7 +68,7 @@ Your task is to generate a Python script to answer the query.
 """.strip()
 
 def execute_generated_code(code, df):
-    local_scope = {'df': df, 'pd': pd, 'plt': plt}
+    local_scope = {'df': df, 'pd': pd, 'plt': plt, 'st': st}
     try:
         exec(code, {}, local_scope)
         result = local_scope.get("result", None)
