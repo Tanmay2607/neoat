@@ -62,7 +62,10 @@ Your task is to generate a Python script to answer the query.
 4. If the query requires a visualization (e.g., "bar chart", "histogram"), generate valid code to create the plot using matplotlib.
    Use `st.pyplot(plt.gcf())` instead of `plt.show()` to display the chart in Streamlit.
 5. Assume 'df' is already loaded.
-6. When matching text (like names or countries), always perform case-insensitive and punctuation-insensitive matching using `.str.lower().replace(",", "").str.strip()`.
+6. When matching text (like names or countries), always normalize BOTH the DataFrame column and the query string using:
+   `.str.lower().replace(",", "").str.strip()`.
+   Example:
+   `df[df["country"].str.lower().replace(",", "").str.strip() == "south sudan"]`
 7. Always check `.empty` before accessing `.iloc[0]` to avoid index errors.
 8. Never use `.empty` on a string or scalar. Use `.empty` only on DataFrames or Series.
 """.strip()
@@ -106,6 +109,7 @@ if uploaded_file and api_key and query:
     try:
         df = pd.read_excel(uploaded_file, engine="openpyxl")
         df = normalize_column_names(df)
+        df = normalize_string_values(df)
         st.subheader("🔍 Data Preview")
         st.dataframe(df.head())
 
