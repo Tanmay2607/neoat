@@ -6,12 +6,12 @@ A Streamlit-powered conversational assistant that lets you query Excel files usi
 
 ## 🚀 Features
 
-- **Upload Excel files** (`.xlsx`) and explore data instantly  
-- **Natural language queries**, e.g., “count countries with total > 100”  
-- **Dynamic Python code generation** via OpenRouter / Mistral LLM  
-- **Visual slides**: bar charts, histograms, etc., displayed seamlessly in Streamlit  
+- **Upload Excel files** (`.xlsx`)  
+- **Natural language queries**, like “count countries with total > 100”  
+- **Dynamic Python code generation**  OpenRouter / Mistral LLM  
+- **Visual slides**: bar charts, histograms, etc., can display in Streamlit  
 - **Smart normalization**: case-insensitive and punctuation-agnostic matching  
-- **Safe execution**: automatically handles DataFrame, Series, scalar outputs  
+- **Safe execution**: handles DataFrame, Series, scalar outputs 
 
 ---
 
