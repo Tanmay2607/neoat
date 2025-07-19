@@ -4,4 +4,3 @@ matplotlib
 openai
 streamlit
 seaborn
-streamlit-pandas-profiling
