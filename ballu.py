@@ -39,7 +39,10 @@ def normalize_column_names(df):
 def normalize_string_values(df):
     for col in df.select_dtypes(include="object"):
         df[col] = df[col].astype(str).str.lower().str.replace(",", "").str.strip()
+    if 'total' in df.columns:
+        df['total'] = pd.to_numeric(df['total'], errors='coerce')
     return df
+
 
 def get_data_schema(df):
     return ", ".join([f"{col} ({df[col].dtype})" for col in df.columns])
