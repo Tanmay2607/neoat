@@ -77,7 +77,7 @@ def execute_generated_code(code, df):
 
 # --- 5. Streamlit App ---
 st.set_page_config(page_title="NeoAT Excel Assistant", layout="centered")
-st.title("📊 Natural Language Excel Assistant")
+st.title("Tanmay's Excel Sheet Analyzer")
 st.markdown("Ask questions like:\n- *‘Count countries with lower rank than Syria’*\n- *‘Plot bar chart of top 5 by score’*")
 
 api_key = st.secrets["openai_api_key"]
