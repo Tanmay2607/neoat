@@ -63,6 +63,7 @@ Your task is to generate a Python script to answer the query.
 5. Assume 'df' is already loaded.
 6. When matching text (like names or countries), always perform case-insensitive and punctuation-insensitive matching using `.str.lower().replace(",", "").str.strip()`.
 7. Always check `.empty` before accessing `.iloc[0]` to avoid index errors.
+8. Never use `.empty` on a string or scalar. Use `.empty` only on DataFrames or Series.
 """.strip()
 
 def execute_generated_code(code, df):
@@ -71,14 +72,24 @@ def execute_generated_code(code, df):
         exec(code, {}, local_scope)
         result = local_scope.get("result", None)
 
-        # If result is a Series of countries, return count and names
-        if isinstance(result, pd.Series) and result.dtype == object:
-            return f"Count: {len(result)}\nCountries:\n" + "\n".join(result.astype(str))
+        # Safe handling for known types
+        if isinstance(result, pd.Series):
+            return result.to_string(index=False)
 
-        return result if result is not None else "✅ Code executed (e.g., chart displayed)."
+        if isinstance(result, pd.DataFrame):
+            return result
+
+        if isinstance(result, (int, float, bool)):
+            return str(result)
+
+        if isinstance(result, str):
+            return result
+
+        return "✅ Code executed successfully. (No specific output returned.)"
 
     except Exception as e:
         return f"❌ Error executing code: {e}"
+
 
 
 # --- 5. Streamlit App ---
