@@ -37,3 +37,9 @@ A Streamlit-powered conversational assistant that lets you query Excel files usi
 ```bash
 streamlit run app.py
 ```
+##🚧 Limitations
+1. Requires a valid OpenRouter (Mistral) API key
+2. Best suited for Excel files with numeric and text-based columns
+3. Complex queries may need clear formulation
+4. LLM response time may vary depending on model/load
+
