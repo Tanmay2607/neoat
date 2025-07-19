@@ -17,11 +17,11 @@ A Streamlit-powered conversational assistant that lets you query Excel files usi
 
 ## 🛠️ Installation
 
- Clone the repo:
+ 1. Clone the repo:
    ```bash
    git clone https://github.com/Tanmay2607/neoat.git
    cd neoat
 
-## Install dependencies
+ 2. Install dependencies
 pip install -r requirements.txt
 
