@@ -57,6 +57,8 @@ Your task is to generate a Python script to answer the query.
 3. The code must calculate the answer and store it in a variable named 'result'.
 4. If the query requires a visualization (e.g., "bar chart", "histogram"), generate valid code to create the plot using matplotlib.
 5. Assume 'df' is already loaded.
+6. When matching text (like names or countries), always perform case-insensitive and punctuation-insensitive matching using `.str.lower().replace(",", "").str.strip()`.
+7. Always check `.empty` before accessing `.iloc[0]` to avoid index errors.
 """.strip()
 
 def execute_generated_code(code, df):
