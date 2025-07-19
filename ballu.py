@@ -75,7 +75,7 @@ def execute_generated_code(code, df):
 
         # Safe handling for known types
         if isinstance(result, pd.Series):
-            return result.to_string(index=False)
+            return result.to_frame(name="value").reset_index()
 
         if isinstance(result, pd.DataFrame):
             return result
