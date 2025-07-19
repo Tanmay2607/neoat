@@ -65,10 +65,7 @@ Your task is to generate a Python script to answer the query.
 4. If the query requires a visualization (e.g., "bar chart", "histogram"), generate valid code to create the plot using matplotlib.
    Use `st.pyplot(plt.gcf())` instead of `plt.show()` to display the chart in Streamlit.
 5. Assume 'df' is already loaded.
-6. When matching text (like names or countries), always normalize BOTH the DataFrame column and the query string using:
-   `.str.lower().replace(",", "").str.strip()`.
-   Example:
-   `df[df["country"].str.lower().replace(",", "").str.strip() == "south sudan"]`
+6. Always normalize both the DataFrame columns and query values using `.str.lower().replace(",", "").str.strip()` when filtering.
 7. Always check `.empty` before accessing `.iloc[0]` to avoid index errors.
 8. Never use `.empty` on a string or scalar. Use `.empty` only on DataFrames or Series.
 9. Never load data from a file. Do not use `pd.read_csv`, `pd.read_excel`, or any other file operations.The DataFrame named `df` is already loaded. Use it directly.
