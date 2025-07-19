@@ -72,6 +72,7 @@ Your task is to generate a Python script to answer the query.
 7. Always check `.empty` before accessing `.iloc[0]` to avoid index errors.
 8. Never use `.empty` on a string or scalar. Use `.empty` only on DataFrames or Series.
 9. Never load data from a file. Do not use `pd.read_csv`, `pd.read_excel`, or any other file operations.The DataFrame named `df` is already loaded. Use it directly.
+10. When sorting by rank, extract numeric part using `rank_number = df['rank'].str.extract(r'(\d+)').astype(float)` and sort using that.
 """.strip()
 
 def execute_generated_code(code, df):
