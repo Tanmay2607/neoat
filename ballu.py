@@ -68,6 +68,7 @@ Your task is to generate a Python script to answer the query.
    `df[df["country"].str.lower().replace(",", "").str.strip() == "south sudan"]`
 7. Always check `.empty` before accessing `.iloc[0]` to avoid index errors.
 8. Never use `.empty` on a string or scalar. Use `.empty` only on DataFrames or Series.
+9. Never load data from a file. Do not use `pd.read_csv`, `pd.read_excel`, or any other file operations.The DataFrame named `df` is already loaded. Use it directly.
 """.strip()
 
 def execute_generated_code(code, df):
