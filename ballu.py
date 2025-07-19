@@ -36,6 +36,10 @@ def call_llm_with_openrouter(prompt, api_key):
 # --- 4. Schema + Normalization ---
 def normalize_column_names(df):
     return df.rename(columns=lambda col: ''.join(e for e in col.strip().lower().replace(' ', '_') if e.isalnum() or e == '_'))
+def normalize_string_values(df):
+    for col in df.select_dtypes(include="object"):
+        df[col] = df[col].astype(str).str.lower().str.replace(",", "").str.strip()
+    return df
 
 def get_data_schema(df):
     return ", ".join([f"{col} ({df[col].dtype})" for col in df.columns])
