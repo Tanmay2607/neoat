@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 from openai import OpenAI
 import re
 import os
+
 # --- 2. Helper: Extract code from LLM ---
 def extract_python_code(response_text):
     match = re.search(r"```(?:python)?(.*?)```", response_text, re.DOTALL)
@@ -12,7 +13,6 @@ def extract_python_code(response_text):
         return match.group(1).strip()
     return response_text
 
-# --- 3. OpenRouter LLM call ---
 # --- 3. OpenRouter LLM call ---
 def call_llm_with_openrouter(prompt, api_key):
     client = OpenAI(
@@ -32,17 +32,16 @@ def call_llm_with_openrouter(prompt, api_key):
     )
     return response.choices[0].message.content
 
-
 # --- 4. Schema + Normalization ---
 def normalize_column_names(df):
     return df.rename(columns=lambda col: ''.join(e for e in col.strip().lower().replace(' ', '_') if e.isalnum() or e == '_'))
+
 def normalize_string_values(df):
     for col in df.select_dtypes(include="object"):
         df[col] = df[col].astype(str).str.lower().str.replace(",", "").str.strip()
     if 'total' in df.columns:
         df['total'] = pd.to_numeric(df['total'], errors='coerce')
     return df
-
 
 def get_data_schema(df):
     return ", ".join([f"{col} ({df[col].dtype})" for col in df.columns])
@@ -68,8 +67,7 @@ Your task is to generate a Python script to answer the query.
 6. Always normalize both the DataFrame columns and query values using `.str.lower().replace(",", "").str.strip()` when filtering.
 7. Always check `.empty` before accessing `.iloc[0]` to avoid index errors.
 8. Never use `.empty` on a string or scalar. Use `.empty` only on DataFrames or Series.
-9. Never load data from a file. Do not use `pd.read_csv`, `pd.read_excel`, or any other file operations.The DataFrame named `df` is already loaded. Use it directly.
-10. When sorting by rank, extract numeric part using `rank_number = df['rank'].str.extract(r'(\d+)').astype(float)` and sort using that.
+9. Never load data from a file. Do not use `pd.read_csv`, `pd.read_excel`, or any other file operations. The DataFrame named `df` is already loaded. Use it directly.
 """.strip()
 
 def execute_generated_code(code, df):
@@ -107,9 +105,6 @@ def execute_generated_code(code, df):
         st.error("❌ Error executing generated code.")
         st.exception(e)
         return f"❌ Error executing code: {e}"
-
-
-
 
 # --- 5. Streamlit App ---
 st.set_page_config(page_title="NeoAT Excel Assistant", layout="centered")
