@@ -26,4 +26,10 @@ A Streamlit-powered conversational assistant that lets you query Excel files usi
     ```bash
     pip install -r requirements.txt
     ```
-
+## ⚙️ Setup
+1. Sign up at OpenRouter.ai and obtain your API key.
+2. Add the key to Streamlit secrets:
+   In ~/.streamlit/secrets.toml (locally) or via the Streamlit Cloud UI:
+   ```
+   openai_api_key = "YOUR_OPENROUTER_API_KEY"
+```
