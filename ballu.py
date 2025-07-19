@@ -78,23 +78,36 @@ def execute_generated_code(code, df):
         exec(code, {}, local_scope)
         result = local_scope.get("result", None)
 
-        # Safe handling for known types
-        if isinstance(result, pd.Series):
-            return result.to_frame(name="value").reset_index()
-
+        # If result is a DataFrame
         if isinstance(result, pd.DataFrame):
-            return result
+            if result.shape[0] <= 50:
+                return result
+            else:
+                st.dataframe(result.head(50))
+                return f"✅ Output truncated: Showing first 50 of {result.shape[0]} rows."
 
-        if isinstance(result, (int, float, bool)):
+        # If result is a Series
+        if isinstance(result, pd.Series):
+            if result.name is None:
+                result.name = "value"
+            result_df = result.to_frame().reset_index()
+            if result_df.shape[0] <= 50:
+                return result_df
+            else:
+                st.dataframe(result_df.head(50))
+                return f"✅ Output truncated: Showing first 50 of {result_df.shape[0]} rows."
+
+        # If result is a scalar (int, float, bool, string)
+        if isinstance(result, (int, float, bool, str)):
             return str(result)
-
-        if isinstance(result, str):
-            return result
 
         return "✅ Code executed successfully. (No specific output returned.)"
 
     except Exception as e:
+        st.error("❌ Error executing generated code.")
+        st.exception(e)
         return f"❌ Error executing code: {e}"
+
 
 
 
